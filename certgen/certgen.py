@@ -30,7 +30,7 @@ def insertCerts():
     URL = 'http://localhost:30333/'
 
 
-    curl_url = "curl http://localhost:30333 -H \"Content-Type: application/json\" -X POST -d '{\"jsonrpc\":"2.0", \"method\":\"invokefunction\",\"params\":[\"0xa7e87c17332d3e34d43d9ac87340f445c17167a5\", \"put_cert\",[\"" + result.get('commonname') + "\",\"" + ca_cert.as_pem() + "\"]]}'"
+    curl_url = "curl http://localhost:30333 -H \"Content-Type: application/json\" -X POST -d '{\"jsonrpc\":\"2.0\", \"method\":\"invokefunction\",\"params\":[\"0xa7e87c17332d3e34d43d9ac87340f445c17167a5\", \"put_cert\",[\"" + result.get('commonname') + "\",\"" + ca_cert.as_pem() + "\"]]}'"
 
     # content = {"jsonrpc":"2.0", "method":"invokefunction","params":["0xa7e87c17332d3e34d43d9ac87340f445c17167a5", "put_cert",[result.get('commonname'), ca_cert.as_pem()]]}
 
