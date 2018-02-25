@@ -1,4 +1,5 @@
-from flask import Flask
+import sqlite3 as sql
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -16,25 +17,25 @@ def get_certificate():
     domain = request.args.get('domain')
     return 0
 
-@app.route("/put", methods=['POST'])
+@app.route("/put", methods=['GET', 'POST'])
 def put_certificate():
     """
     Put certificate into the blockchain.
     """
     # DB connections
-    conn = sql.connect(DATABASE)
-    cur = conn.cursor()
+    # conn = sql.connect(DATABASE)
+    # cur = conn.cursor()
     # Extract field values
     domain = request.args.get('domain')
     file_contents = request.args.get('filecontents')
     # Enter into database
-    cur.execute("INSERT INTO blockchain (domain, filecontents) VALUES (?,?);", \
-            (domain, file_contents))
+    # comb = (domain, file_contents)
+    # cur.execute('INSERT INTO blockchain (domain, filecontents) VALUES ("%s","%s");', comb)
+    print(domain, file_contents)
+    # conn.commit()
+    # conn.close()
 
-    conn.commit()
-    conn.close()
-
-    return 0
+    return "dog"
 
 if __name__ == "__main__":
     # Only for debugging while developing
