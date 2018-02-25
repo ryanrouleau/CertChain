@@ -1,0 +1,1 @@
+*/10 * * * * root /some/path/main.py
