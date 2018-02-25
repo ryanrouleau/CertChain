@@ -3,6 +3,7 @@ import ssllib
 from zipfile import ZipFile
 import json
 import requests
+import subprocess
 
 app = Flask(__name__)
 
@@ -29,8 +30,12 @@ def insertCerts():
     URL = 'http://localhost:30333/'
 
 
-    content = {"jsonrpc":"2.0", "method":"invokefunction","params":["0xa7e87c17332d3e34d43d9ac87340f445c17167a5", "put_cert",[result.get('commonname'), ca_cert.as_pem()]]}
+    curl_url = "curl http://localhost:30333 -H \"Content-Type: application/json\" -X POST -d '{\"jsonrpc\":"2.0", \"method\":\"invokefunction\",\"params\":[\"0xa7e87c17332d3e34d43d9ac87340f445c17167a5\", \"put_cert\",[\"" + result.get('commonname') + "\",\"" + ca_cert.as_pem() + "\"]]}'"
 
-    r = requests.posts(url = URL, headers="Content-Type: application/json", json=content)
+    # content = {"jsonrpc":"2.0", "method":"invokefunction","params":["0xa7e87c17332d3e34d43d9ac87340f445c17167a5", "put_cert",[result.get('commonname'), ca_cert.as_pem()]]}
+
+    # r = requests.posts(url = URL, headers="Content-Type: application/json", json=content)
+
+    subprocess.call(curl_url, shell = True)
 
     return send_file(cert_name, as_attachment=True)
