@@ -1,6 +1,10 @@
 import sys
 import subprocess
 from glob import glob
+import urllib2
+
+BLOCK_CHAIN_REQ_ALL = 'localhost:4443/getall'
+BLOCK_CHAIN_REQ_CERT = 'localhost:4443/get?domain='
 
 CERT_HEADER = '-----BEGIN CERTIFICATE-----'
 CERT_FOOTER = '-----END CERTIFICATE-----'
@@ -38,11 +42,23 @@ def writeCertFile(fileName, certText):
     f.close()
 
 def requestCerts():
-    
+    response = urllib2.urlopen(BLOCK_CHAIN_REQ_ALL).read()
+    hosts = response.split(',')
 
-    return certs
+    f = open('hosts.txt', 'r')
+    hostFileContent = f.read()
+    f.close()
+
+    currentHosts = hostFileContent.split(',')
+
+    hostDiff = hosts - currentHosts
+
+    for h in hostDiff:
+        response = urllib2.urlopen(BLOCK_CHAIN_REQ_CERT + h).read()
+        writeCertFile(h.split('.')[0] + '.crt', response)
 
 def main():
+    requestCerts()
     addCerts()
 
 main()
