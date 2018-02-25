@@ -6,9 +6,6 @@ import urllib2
 BLOCK_CHAIN_REQ_ALL = 'localhost:4443/getall'
 BLOCK_CHAIN_REQ_CERT = 'localhost:4443/get?domain='
 
-CERT_HEADER = '-----BEGIN CERTIFICATE-----'
-CERT_FOOTER = '-----END CERTIFICATE-----'
-
 CERT_DIR = 'cert/'
 
 CONFIG_CERT_DIR = '~/.mozilla/firefox/hh5nkz9n.default/'
@@ -36,9 +33,7 @@ def addCerts():
     
 def writeCertFile(fileName, certText):
     f = open(CERT_DIR + fileName, 'w')
-    f.write(CERT_HEADER + '\n')
     f.write(certText)
-    f.write(CERT_FOOTER + '\n')
     f.close()
 
 def requestCerts():
@@ -55,7 +50,7 @@ def requestCerts():
 
     for h in hostDiff:
         response = urllib2.urlopen(BLOCK_CHAIN_REQ_CERT + h).read()
-        writeCertFile(h.split('.')[0] + '.crt', response)
+        writeCertFile(h + '.crt', response)
 
 def main():
     requestCerts()
