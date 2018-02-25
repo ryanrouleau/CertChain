@@ -1,0 +1,1 @@
+docker run --rm -it --expose=20333-20336 --expose=30333-30336 --entrypoint=python3 neo-python prompt.py -p
