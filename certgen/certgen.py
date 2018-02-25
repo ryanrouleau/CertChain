@@ -26,8 +26,11 @@ def insertCerts():
     #      f.write(ca_cert.as_pem())
     #  with open("temp.crt", "r") as f:
     #      f.read(ca_
-    URL = 'http://localhost/put?domain=' + result.get('commonname') +
-            '&filecontents=' + ca_cert.as_pem()
-    r = requests.get(url = URL)
+    URL = 'http://localhost:30333/'
+
+
+    content = {"jsonrpc":"2.0", "method":"invokefunction","params":["0xa7e87c17332d3e34d43d9ac87340f445c17167a5", "put_cert",[result.get('commonname'), ca_cert.as_pem()]]}
+
+    r = requests.posts(url = URL, headers="Content-Type: application/json", json=content)
 
     return send_file(cert_name, as_attachment=True)
