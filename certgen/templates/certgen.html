@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<form action="{{ url_for('insertCerts') }}" method="post">
+    <label>Country: <input type="text" name="country"></label><br><br>
+    <label>State: <input type="text" name="state"></label><br><br>
+    <label>City: <input type="text" name="city"></label><br><br>
+    <label>Common Name: <input type="text" name="commonname" required></label><br><br>
+    <label>Organization: <input type="text" name="org"></label><br><br>
+    <label>Organizational Unit: <input type="text" name="orgunit"></label><br><br>
+    <input type="submit">
+
+</form>
+
+</body>
+</html>
