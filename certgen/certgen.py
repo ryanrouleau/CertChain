@@ -22,6 +22,6 @@ def insertCerts():
         f.write(server_private_key.as_pem(None)) 
 
     # insert ca_cert into blockchain here
-    req = urllib2.urlopen('localhost:PORT/put?domain=' + commonname + '&fileContents=' + server_cert).read()
+    req = urllib2.urlopen('localhost:PORT/put?domain=' + commonname + '&filecontents=' + server_cert).read()
 
     return send_file(cert_name, as_attachment=True)
