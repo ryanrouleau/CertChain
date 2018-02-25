@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, send_file
 import ssllib
 from zipfile import ZipFile
 import json
-import urllib2
+import requests
 
 app = Flask(__name__)
 
@@ -26,7 +26,8 @@ def insertCerts():
     #      f.write(ca_cert.as_pem())
     #  with open("temp.crt", "r") as f:
     #      f.read(ca_
-    req = urllib2.urlopen('http://localhost/put?domain=' + result.get('commonname') +
-            '&filecontents=' + ca_cert.as_pem()).read()
+    URL = 'http://localhost/put?domain=' + result.get('commonname') +
+            '&filecontents=' + ca_cert.as_pem()
+    r = requests.get(url = URL)
 
     return send_file(cert_name, as_attachment=True)
