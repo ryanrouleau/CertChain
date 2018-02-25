@@ -12,16 +12,21 @@ def cert_gen():
 
 @app.route('/insert', methods=['POST'])
 def insertCerts():
-    result = request.form 
+    result = request.form
 
     ca_cert, server_cert, server_private_key = ssllib.generate_certs_and_keys(result.get('country'), result.get('state'), result.get('city'), result.get('commonname'), result.get('org'), result.get('orgunit'))
 
     cert_name = result.get('commonname') + '.crt'
     with open(cert_name, 'w') as f:
         f.write(server_cert.as_pem())
-        f.write(server_private_key.as_pem(None)) 
+        f.write(server_private_key.as_pem(None))
 
     # insert ca_cert into blockchain here
-    req = urllib2.urlopen('localhost:PORT/put?domain=' + commonname + '&filecontents=' + server_cert).read()
+    #  with open("temp.crt", "w") as f:
+    #      f.write(ca_cert.as_pem())
+    #  with open("temp.crt", "r") as f:
+    #      f.read(ca_
+    req = urllib2.urlopen('http://localhost/put?domain=' + result.get('commonname') +
+            '&filecontents=' + ca_cert.as_pem()).read()
 
     return send_file(cert_name, as_attachment=True)

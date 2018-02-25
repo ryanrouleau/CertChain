@@ -1,0 +1,1 @@
+docker run --rm -it --name neo-python -v $(PWD)/smartc-dev/:/neo-python/smartc-dev/ --expose=20333-20336 --expose=30333-30336 --entrypoint=bash neo-python
