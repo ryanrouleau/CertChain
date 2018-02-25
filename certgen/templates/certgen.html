@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>CertChain - TLS Decentralization</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
 </head>
-<body>
+<script>
 
+</script>
+<body>
+<div class="onboarding">
+<span style="font-size:48px;" class="bojldboldbold">
+Abolishing the need for Central Authorities.
+</span>
+<br>
+<span style="font-size: 28px;display:inline-block;padding-top:80px;font-weight:600">
+The world's first <span class="boldbold">decentralized SSL certificates</span>.<br>Powered by the <span class="boldbold">NEO</span> blockchain.
+</span>
+<form action="{{ url_for('insertCerts') }}" method="post" style="margin-top:60px;">
+    <label><input class="input" type="text" name="country" placeholder="Country:"></label><br><br>
+    <label><input class="input" type="text" name="state" placeholder="State:"></label><br><br>
+    <label><input class="input" type="text" name="city" placeholder="City:"></label><br><br>
+    <label><input class="input" type="text" name="commonname" required placeholder="Common Name:"></label><br><br>
+    <label><input class="input" type="text" name="org" placeholder="Organization:"></label><br><br>
+    <label><input class="input" type="text" name="orgunit" placeholder="Organization Unit:"></label><br><br>
+    <input type="submit" value="Generate & Deploy Certificate" class="button" style="margin-top:50px;width:400px;margin-bottom:60px;">
+
+</form>
+<!--
+<div class="button" style="margin-top:50px;width:400px;">
+Generate and Deploy a Certificate
+</div>
+-->
+</div>
+<!--
+<p>
+Disrupting internet architecture by decentralizing TLS with the NEO blockchain.
+</p>
+-->
+
+<!--
 <form action="{{ url_for('insertCerts') }}" method="post">
     <label>Country: <input type="text" name="country"></label><br><br>
     <label>State: <input type="text" name="state"></label><br><br>
@@ -15,6 +54,7 @@
     <input type="submit">
 
 </form>
+-->
 
 </body>
 </html>
